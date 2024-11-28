@@ -4,7 +4,9 @@
 
 using namespace std;
 
-#define DELAY_CONST 100000
+#define DELAY_CONST 1000
+#define XSIZE 20
+#define YSIZE 10
 
 bool exitFlag;
 
@@ -55,6 +57,31 @@ void RunLogic(void)
 
 void DrawScreen(void)
 {
+   
+    objPos a = objPos(9,3,'@');
+    
+    int i, j;
+    for (j = 0; j<YSIZE; j++)
+    {
+        MacUILib_printf("\n");
+
+        for (i = 0; i < XSIZE; i++)
+        {
+            if ( (j==0) || (j==(YSIZE-1)) || (i==0) || (i==(XSIZE-1)))
+            {
+                MacUILib_printf("#");
+            }
+            else if( (i==a.pos->x) && (j==a.pos->y) )
+            {
+                MacUILib_printf("%c", a.symbol);
+            }
+            else
+            {
+                MacUILib_printf(" ");
+            }
+        }
+    }
+    
     MacUILib_clearScreen();    
 }
 
