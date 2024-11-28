@@ -58,6 +58,15 @@ void Player::updatePlayerDir()
                 myDir = RIGHT;
                 }
                 break;
+           
+            //debugging cases
+            case 'p':
+                mainGameMechsRef->incrementScore();
+                break;
+            case 'l':
+                mainGameMechsRef->setLoseFlag();
+                break;
+                
             default:
                 myDir = STOP;
                 break; 

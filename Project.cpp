@@ -48,7 +48,7 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   
+    myGM->collectAsyncInput();
 }
 
 void RunLogic(void)
