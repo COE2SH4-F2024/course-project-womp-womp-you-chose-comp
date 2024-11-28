@@ -1,12 +1,15 @@
 #include <iostream>
 #include "MacUILib.h"
 #include "objPos.h"
+#include "Player.h"
 
 using namespace std;
 
 #define DELAY_CONST 1000
 #define XSIZE 20
 #define YSIZE 10
+
+Player *myPlayer;
 
 bool exitFlag;
 
@@ -42,6 +45,8 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
+    myPlayer = new Player(nullptr);
+
     exitFlag = false;
 }
 
@@ -57,7 +62,13 @@ void RunLogic(void)
 
 void DrawScreen(void)
 {
-   
+    MacUILib_clearScreen();
+
+    objPos playerPos = myPlayer->getPlayerPos();
+    //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
+    MacUILib_printf("Player is located at [x,y] = [%d, %d, %c]", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+
+
     objPos a = objPos(9,3,'@');
     
     int i, j;
@@ -82,7 +93,7 @@ void DrawScreen(void)
         }
     }
     
-    MacUILib_clearScreen();    
+       
 }
 
 void LoopDelay(void)
@@ -94,6 +105,8 @@ void LoopDelay(void)
 void CleanUp(void)
 {
     MacUILib_clearScreen();    
+
+    delete myPlayer;
 
     MacUILib_uninit();
 }
