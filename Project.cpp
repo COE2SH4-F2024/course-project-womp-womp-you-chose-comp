@@ -2,16 +2,13 @@
 #include "MacUILib.h"
 #include "objPos.h"
 #include "Player.h"
-
+#include "GameMechs.h"
 using namespace std;
 
-#define DELAY_CONST 1000
-#define XSIZE 20
-#define YSIZE 10
+#define DELAY_CONST 500000
 
 Player *myPlayer;
-
-bool exitFlag;
+GameMechs *myGM;
 
 void Initialize(void);
 void GetInput(void);
@@ -27,7 +24,7 @@ int main(void)
 
     Initialize();
 
-    while(exitFlag == false)  
+    while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic();
@@ -45,9 +42,8 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    myPlayer = new Player(nullptr);
-
-    exitFlag = false;
+    myGM = new GameMechs();
+    myPlayer = new Player(myGM);
 }
 
 void GetInput(void)
@@ -57,7 +53,10 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    if(myGM->getInput() != '\0'){
+        myPlayer->updatePlayerDir();
+    }
+    myPlayer->movePlayer();
 }
 
 void DrawScreen(void)
@@ -66,25 +65,24 @@ void DrawScreen(void)
 
     objPos playerPos = myPlayer->getPlayerPos();
     //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
-    MacUILib_printf("Player is located at [x,y] = [%d, %d, %c]", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+    MacUILib_printf("Player is located at [x,y] = [%d, %d], %c\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+    MacUILib_printf("Key pressed %c", myGM->getInput());
 
-
-    objPos a = objPos(9,3,'@');
     
     int i, j;
-    for (j = 0; j<YSIZE; j++)
+    for (j = 0; j<myGM->getBoardSizeY(); j++)
     {
         MacUILib_printf("\n");
 
-        for (i = 0; i < XSIZE; i++)
+        for (i = 0; i < myGM->getBoardSizeX(); i++)
         {
-            if ( (j==0) || (j==(YSIZE-1)) || (i==0) || (i==(XSIZE-1)))
+            if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1)))
             {
                 MacUILib_printf("#");
             }
-            else if( (i==a.pos->x) && (j==a.pos->y) )
+            else if( (i==playerPos.pos->x) && (j==playerPos.pos->y) )
             {
-                MacUILib_printf("%c", a.symbol);
+                MacUILib_printf("%c", playerPos.symbol);
             }
             else
             {
@@ -92,8 +90,7 @@ void DrawScreen(void)
             }
         }
     }
-    
-       
+    MacUILib_printf("\n");    
 }
 
 void LoopDelay(void)
@@ -107,6 +104,7 @@ void CleanUp(void)
     MacUILib_clearScreen();    
 
     delete myPlayer;
+    delete myGM;
 
     MacUILib_uninit();
 }
