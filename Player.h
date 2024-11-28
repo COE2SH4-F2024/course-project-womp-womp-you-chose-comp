@@ -25,6 +25,8 @@ class Player
         void movePlayer();
 
         // More methods to be added here
+        Player(const Player &d);
+        Player& operator=(const Player &d);
 
     private:
         objPos playerPos; // Upgrade this in iteration 3.       
