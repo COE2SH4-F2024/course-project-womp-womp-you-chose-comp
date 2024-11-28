@@ -66,9 +66,8 @@ void DrawScreen(void)
     objPos playerPos = myPlayer->getPlayerPos();
     //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
     MacUILib_printf("Player is located at [x,y] = [%d, %d], %c\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
-    MacUILib_printf("Key pressed %c", myGM->getInput());
+    //MacUILib_printf("Key pressed %c", myGM->getInput());
 
-    
     int i, j;
     for (j = 0; j<myGM->getBoardSizeY(); j++)
     {
@@ -90,7 +89,18 @@ void DrawScreen(void)
             }
         }
     }
-    MacUILib_printf("\n");    
+    MacUILib_printf("\n");  
+
+    if(myGM->getLoseFlagStatus()){
+        MacUILib_printf("You suck Biatch!\n");
+        MacUILib_printf("Your score is: %d", myGM->getScore());
+    }
+    else if(myGM->getExitFlagStatus()){
+        MacUILib_printf("You exited the Game, why come back please! PLEEEEAAAASEEEE!\n");
+        MacUILib_printf("Your score is: %d", myGM->getScore());
+    }
+
+
 }
 
 void LoopDelay(void)
@@ -100,9 +110,7 @@ void LoopDelay(void)
 
 
 void CleanUp(void)
-{
-    MacUILib_clearScreen();    
-
+{   
     delete myPlayer;
     delete myGM;
 
