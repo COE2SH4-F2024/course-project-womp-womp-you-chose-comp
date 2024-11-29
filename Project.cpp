@@ -66,9 +66,9 @@ void RunLogic(void)
     myPlayer->movePlayer();
     
     if(myGM->getInput() == 'o'){
+        myGM->setInput('\0');
         food1->generateFood(myPlayer->getPlayerPos());
     }
-    
 }
 
 void DrawScreen(void)
