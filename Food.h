@@ -23,10 +23,11 @@ class Food
         Food(GameMechs *thisGMref);
         ~Food();
 
-        void generateFood(const objPos& foodObj);
+        void generateFood(const objPos& blockoff);
         objPos getFoodPos() const;
-        int getFoodPosX() const;
-        int getFoodPosY() const;
+        int getFoodPosX();
+        int getFoodPosY();
+        char getFoodSymbol();
 
 };
 #endif

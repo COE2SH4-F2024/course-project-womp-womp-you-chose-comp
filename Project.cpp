@@ -3,12 +3,16 @@
 #include "objPos.h"
 #include "Player.h"
 #include "GameMechs.h"
+#include "time.h"
+#include "Food.h"
+
 using namespace std;
 
-#define DELAY_CONST 500000
+#define DELAY_CONST 100000
 
 Player *myPlayer;
 GameMechs *myGM;
+Food *food1;
 
 void Initialize(void);
 void GetInput(void);
@@ -41,9 +45,12 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-
+   
+    srand(time(NULL));
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
+    food1 = new Food(myGM);
+    food1->generateFood(myPlayer->getPlayerPos());
 }
 
 void GetInput(void)
@@ -57,6 +64,11 @@ void RunLogic(void)
         myPlayer->updatePlayerDir();
     }
     myPlayer->movePlayer();
+    
+    if(myGM->getInput() == 'o'){
+        food1->generateFood(myPlayer->getPlayerPos());
+    }
+    
 }
 
 void DrawScreen(void)
@@ -83,6 +95,10 @@ void DrawScreen(void)
             {
                 MacUILib_printf("%c", playerPos.symbol);
             }
+            else if(i == food1->getFoodPosX() && j == food1->getFoodPosY())
+            {
+                MacUILib_printf("%c", food1->getFoodSymbol());
+            }
             else
             {
                 MacUILib_printf(" ");
@@ -96,7 +112,7 @@ void DrawScreen(void)
         MacUILib_printf("Your score is: %d", myGM->getScore());
     }
     else if(myGM->getExitFlagStatus()){
-        MacUILib_printf("You exited the Game, why come back please! PLEEEEAAAASEEEE!\n");
+        MacUILib_printf("You exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");
         MacUILib_printf("Your score is: %d", myGM->getScore());
     }
 
