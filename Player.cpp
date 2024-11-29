@@ -68,7 +68,6 @@ void Player::updatePlayerDir()
                 break;
                 
             default:
-                myDir = STOP;
                 break; 
         }
 }
