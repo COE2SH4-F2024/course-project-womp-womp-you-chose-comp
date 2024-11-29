@@ -50,11 +50,14 @@ void Initialize(void)
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
     food1 = new Food(myGM);
-    food1->generateFood(myPlayer->getPlayerPos());
+
+    // For debugging
+    //food1->generateFood(myPlayer->getPlayerPos());
 }
 
 void GetInput(void)
 {
+    myGM->clearInput();
     myGM->collectAsyncInput();
 }
 
@@ -65,44 +68,97 @@ void RunLogic(void)
     }
     myPlayer->movePlayer();
     
-    if(myGM->getInput() == 'o'){
-        myGM->setInput('\0');
-        food1->generateFood(myPlayer->getPlayerPos());
-    }
+
+    // For debugging, generating food with 'o'
+    // if(myGM->getInput() == 'o'){
+    //     myGM->setInput('\0');
+    //     food1->generateFood(myPlayer->getPlayerPos());
+    // }
 }
 
 void DrawScreen(void)
 {
-    MacUILib_clearScreen();
-
-    objPos playerPos = myPlayer->getPlayerPos();
     //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
-    MacUILib_printf("Player is located at [x,y] = [%d, %d], %c\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
-    //MacUILib_printf("Key pressed %c", myGM->getInput());
+    //MacUILib_printf("Player is located at [x,y] = [%d, %d], %c\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
+    MacUILib_printf("Key pressed %c", myGM->getInput());
 
-    int i, j;
-    for (j = 0; j<myGM->getBoardSizeY(); j++)
+    // int i, j, k;
+    // for (j = 0; j<myGM->getBoardSizeY(); j++)
+    // {
+    //     MacUILib_printf("\n");
+    //     for (i = 0; i < myGM->getBoardSizeX(); i++)
+    //     {
+
+    //         if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1)))
+    //         {
+    //             MacUILib_printf("#");
+    //         }
+    //         else if( (i == playerPos.pos->x) && (j==playerPos.pos->y) )
+    //         {
+    //          for(k = 0; k < playerPos->getSize(); k++)
+    //             {
+    //                 tempObj.setObjPos(playerPos->getElement(k));
+
+    //                 if(j == tempObj.pos->x && i == tempObj.pos->y)
+    //                 {
+    //                     MacUILib_printf("%c", tempObj.symbol);
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //         else if(i == food1->getFoodPosX() && j == food1->getFoodPosY())
+    //         {
+    //             MacUILib_printf("%c", food1->getFoodSymbol());
+    //         }
+    //         else
+    //         {
+    //             MacUILib_printf(" ");
+    //         }
+    //     }
+    // }
+    // MacUILib_printf("\n");  
+    
+
+
+    int i, j, k, snake = 0;
+    
+    MacUILib_clearScreen();
+    objPosArrayList* playerPosList = myPlayer->getPlayerPos(); // getting player location
+    objPos tempObj;
+
+    for (j = 0; j < myGM->getBoardSizeY(); j++)
     {
         MacUILib_printf("\n");
-
         for (i = 0; i < myGM->getBoardSizeX(); i++)
         {
-            if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1)))
+            for(k = 0; k < playerPosList->getSize(); k++)
             {
-                MacUILib_printf("#");
+                tempObj.setObjPos(playerPosList->getElement(k));
+
+                if(i == tempObj.pos->x && j == tempObj.pos->y)
+                {
+                    MacUILib_printf("%c", tempObj.symbol);
+                    snake = 1;
+                    break;
+                }
             }
-            else if( (i==playerPos.pos->x) && (j==playerPos.pos->y) )
+
+            if(!snake)
             {
-                MacUILib_printf("%c", playerPos.symbol);
+                if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1))) // Print game board
+                {
+                    MacUILib_printf("#");
+                }
+                // else if(i == food1->getFoodPosX() && j == food1->getFoodPosY())
+                // {
+                //     MacUILib_printf("%c", food1->getFoodSymbol());
+                // }
+                else    // Print Empty Space
+                {
+                    MacUILib_printf(" ");
+                }
             }
-            else if(i == food1->getFoodPosX() && j == food1->getFoodPosY())
-            {
-                MacUILib_printf("%c", food1->getFoodSymbol());
-            }
-            else
-            {
-                MacUILib_printf(" ");
-            }
+            snake = 0;
         }
     }
     MacUILib_printf("\n");  
@@ -115,8 +171,6 @@ void DrawScreen(void)
         MacUILib_printf("You exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");
         MacUILib_printf("Your score is: %d", myGM->getScore());
     }
-
-
 }
 
 void LoopDelay(void)

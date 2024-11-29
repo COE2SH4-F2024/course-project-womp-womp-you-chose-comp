@@ -23,7 +23,7 @@ objPos::~objPos()
     delete pos;
 }
 
-objPos::objPos(const objPos &d)
+objPos::objPos(const objPos &d) // Copy constructor
 {
     pos = new Pos;
     pos->x = d.pos->x;
@@ -31,10 +31,13 @@ objPos::objPos(const objPos &d)
     symbol = d.symbol;
 }
 
-objPos& objPos::operator=(const objPos &d)
+objPos& objPos::operator=(const objPos &d) // copy assignment operator
 {
     if(this != &d)
     {
+        delete pos;
+
+        pos = new Pos;
         this->pos->x = d.pos->x;
         this->pos->y = d.pos->y;
         this->symbol = d.symbol;
@@ -58,6 +61,12 @@ void objPos::setObjPos(int xPos, int yPos, char sym)
     pos->x = xPos;
     pos->y = yPos;
     symbol = sym;
+}
+
+void objPos::setObjPos(int xPos, int yPos)
+{
+    pos->x = xPos;
+    pos->y = yPos;
 }
 
 objPos objPos::getObjPos() const

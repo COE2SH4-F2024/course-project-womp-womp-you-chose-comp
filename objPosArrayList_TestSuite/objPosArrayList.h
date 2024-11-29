@@ -15,6 +15,8 @@ class objPosArrayList
     public:
         objPosArrayList();
         ~objPosArrayList();
+        objPosArrayList(const objPosArrayList &d); //Copy cunstructor
+        objPosArrayList& operator = (const objPosArrayList &d); //Copy assignment operator
 
         int getSize() const;
         void insertHead(objPos thisPos);

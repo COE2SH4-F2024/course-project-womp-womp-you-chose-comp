@@ -6,14 +6,46 @@ using namespace std;
 // Check lecture contents on general purpose array list construction, 
 // and modify it to support objPos array list construction.
 
-objPosArrayList::objPosArrayList()
+objPosArrayList::objPosArrayList()  //Constructor
 {
     aList = new objPos[ARRAY_MAX_CAP];
     arrayCapacity = ARRAY_MAX_CAP;
     listSize = 0;
 }
 
-objPosArrayList::~objPosArrayList()
+
+objPosArrayList::objPosArrayList(const objPosArrayList &d) // Copy Constructor
+{
+    listSize = d.listSize;
+    arrayCapacity = d.arrayCapacity;
+
+    aList = new objPos[arrayCapacity];
+
+    for(int i = 0; i < listSize; i++)
+    {
+        aList[i] = d.aList[i];
+    }
+}
+
+objPosArrayList &objPosArrayList::operator=(const objPosArrayList &d) // Copy assignment operator 
+{
+    if(this != &d)
+    {
+        delete[] aList;
+
+        listSize = d.listSize;
+        arrayCapacity = d.arrayCapacity;
+        aList = new objPos[arrayCapacity];
+
+        for(int i = 0; i < listSize; i++)
+        {
+            aList[i] = d.aList[i];
+        }
+    }
+    return *this;
+}
+
+objPosArrayList::~objPosArrayList() // Destructor
 {
     delete[] aList;
 }
@@ -25,16 +57,19 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if(listSize >= arrayCapacity){ // IF SOMETHING IS BROKERN MAKE THIS ARRAY_MAX_CAP
+    if(listSize >= arrayCapacity){ // IF SOMETHING IS BROKEN MAKE THIS ARRAY_MAX_CAP
         throw overflow_error("insertHead Error: List is already full");
     }
+    
     for(int i = listSize; i > 0; i--)
     {
         // cout << "Element to shuffle: " << aList[i-1] << endl;
-        aList[i] = aList[i - 1];
+        aList[i+1] = aList[i - 1];
     }
-    
+    //First element
     aList[0] = thisPos;
+    
+    //incrementing size of list
     listSize++;
 }
 
@@ -57,6 +92,7 @@ void objPosArrayList::removeHead()
     {
         aList[i] = aList[i+1];
     }
+    //decrementing list size
     listSize--;
 }
 
@@ -75,7 +111,7 @@ objPos objPosArrayList::getHeadElement() const
     if(listSize == 0){
         throw underflow_error("getHeadElement Error: List is empty");
     }
-    return aList[0];
+    return aList[0]; // return first element in list
 }
 
 objPos objPosArrayList::getTailElement() const
@@ -83,6 +119,7 @@ objPos objPosArrayList::getTailElement() const
     if(listSize == 0){
         throw underflow_error("getTailElement Error: List is empty");
     }
+    //returning last item in list
     return aList[listSize - 1];
 }
 
@@ -92,6 +129,7 @@ objPos objPosArrayList::getElement(int index) const
         throw out_of_range("getElement Error: Index is out of range");
     }
     
+    // return the item at "index"
     return aList[index];
 
 }
