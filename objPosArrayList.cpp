@@ -50,7 +50,7 @@ objPosArrayList::~objPosArrayList() // Destructor
     delete[] aList;
 }
 
-int objPosArrayList::getSize() const
+int objPosArrayList::getSize() const // Getter
 {
     return listSize;
 }

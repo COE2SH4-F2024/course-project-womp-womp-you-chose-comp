@@ -79,50 +79,11 @@ void RunLogic(void)
 void DrawScreen(void)
 {
     //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
-    //MacUILib_printf("Player is located at [x,y] = [%d, %d], %c\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
-    MacUILib_printf("Key pressed %c", myGM->getInput());
-
-    // int i, j, k;
-    // for (j = 0; j<myGM->getBoardSizeY(); j++)
-    // {
-    //     MacUILib_printf("\n");
-    //     for (i = 0; i < myGM->getBoardSizeX(); i++)
-    //     {
-
-    //         if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1)))
-    //         {
-    //             MacUILib_printf("#");
-    //         }
-    //         else if( (i == playerPos.pos->x) && (j==playerPos.pos->y) )
-    //         {
-    //          for(k = 0; k < playerPos->getSize(); k++)
-    //             {
-    //                 tempObj.setObjPos(playerPos->getElement(k));
-
-    //                 if(j == tempObj.pos->x && i == tempObj.pos->y)
-    //                 {
-    //                     MacUILib_printf("%c", tempObj.symbol);
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //         else if(i == food1->getFoodPosX() && j == food1->getFoodPosY())
-    //         {
-    //             MacUILib_printf("%c", food1->getFoodSymbol());
-    //         }
-    //         else
-    //         {
-    //             MacUILib_printf(" ");
-    //         }
-    //     }
-    // }
-    // MacUILib_printf("\n");  
     
-
-
     int i, j, k, snake = 0;
     
     MacUILib_clearScreen();
+    //MacUILib_printf("Key pressed: %c", myGM->getInput());
     objPosArrayList* playerPosList = myPlayer->getPlayerPos(); // getting player location
     objPos tempObj;
 

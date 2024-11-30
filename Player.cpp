@@ -97,43 +97,7 @@ void Player::movePlayer()
     int headXPos = nextPosition.pos->x;
     int headYPos = nextPosition.pos->y;
 
-    // if (myDir == UP){
-    //     if (headYPos > 1){
-    //         headYPos--;
-    //     }
-    //     else{
-    //         headYPos = (boardY-2);
-    //     }
-    // }
-
-    // else if(myDir == DOWN){
-    //     if (headYPos < (boardY-2)){
-    //         headYPos++;
-    //     }
-    //     else{
-    //         headYPos = 1;
-    //     }
-    // }
-
-    // else if(myDir == RIGHT){
-    //     if (headXPos < (boardX-2)){
-    //         headXPos++;
-    //     }
-    //     else{
-    //         headXPos = 1;
-    //     }
-    // }
-
-    // else if(myDir == LEFT){
-    //     if (headXPos > 1){
-    //         headXPos--;
-    //     }
-    //     else{
-    //         headXPos = (boardX-2);
-    //     }
-    // }
-
-    switch(myDir)
+    switch(myDir) // Updating Position Based on Direction
     {
         case UP:
             headYPos--;
