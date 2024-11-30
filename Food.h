@@ -2,7 +2,6 @@
 #define FOOD_H
 
 #include <time.h>
-#include "Player.h"
 #include "objPosArrayList.h"
 #include "objPos.h"
 #include "GameMechs.h"
