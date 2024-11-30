@@ -98,5 +98,3 @@ void GameMechs::clearInput()
 
 // More methods should be added here
 
-
-
