@@ -4,7 +4,7 @@
 Food::Food(GameMechs *thisGMref)
 {
     mainGameMechsRef = thisGMref;
-    foodPos = new objPos(10,10,'@');
+    foodPos = new objPos(5,6,'@');
 }
 
 Food::~Food()
