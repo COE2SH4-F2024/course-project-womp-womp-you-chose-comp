@@ -4,12 +4,12 @@
 Food::Food(GameMechs *thisGMref)
 {
     mainGameMechsRef = thisGMref;
-    food = new objPos(10,10,'@');
+    foodPos = new objPos(10,10,'@');
 }
 
 Food::~Food()
 {
-    delete[] food;
+    delete[] foodPos;
 }
 
 void Food::generateFood(const objPos& blockoff)
@@ -20,9 +20,9 @@ void Food::generateFood(const objPos& blockoff)
         valid = 1; 
         rand_x = rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1;
         rand_y = rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1;
-        food->setObjPos(rand_x, rand_y, '@');
+        foodPos->setObjPos(rand_x, rand_y, '@');
 
-        if(food->isPosEqual(&blockoff)){
+        if(foodPos->isPosEqual(&blockoff)){
             valid = 0; 
         }
     }
@@ -30,20 +30,20 @@ void Food::generateFood(const objPos& blockoff)
 
 objPos Food::getFoodPos() const
 {
-    return *food;
+    return *foodPos;
 }
 
 int Food::getFoodPosX()
 {
-    return food->pos->x;
+    return foodPos->pos->x;
 }
 
 int Food::getFoodPosY()
 {
-    return food->pos->y;
+    return foodPos->pos->y;
 }
 
 char Food::getFoodSymbol()
 {
-    return food->symbol;
+    return foodPos->symbol;
 }

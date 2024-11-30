@@ -13,7 +13,7 @@ class Food
 {
 
     private:
-        objPos* food;
+        objPos* foodPos;
         GameMechs *mainGameMechsRef;
 
         int rand_x;

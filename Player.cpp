@@ -1,9 +1,10 @@
 #include "Player.h"
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* thisFRef)
 {
     mainGameMechsRef = thisGMRef;
+    mainFoodRef = thisFRef;
     myDir = STOP;
 
     // more actions to be included
@@ -11,10 +12,7 @@ Player::Player(GameMechs* thisGMRef)
     playerPosList = new objPosArrayList();
     playerPosList->insertHead(objPos(5,5,'*'));
 
-    // Original initialization of player Coords
-    // playerPos.pos->x = mainGameMechsRef->getBoardSizeX()/2;
-    // playerPos.pos->y = mainGameMechsRef->getBoardSizeY()/2 ;
-    // playerPos.symbol = '*';
+
 }
 
 
@@ -22,7 +20,7 @@ Player::~Player()
 {
     // delete any heap members here
     // no keyword "new" in the constructotr, hence no heap member.
-
+    delete[] playerPosList;
     // we can leave the destructor empty for now...
     // Iteration 3 update: NOT ANYMORE??
 
@@ -145,4 +143,14 @@ void Player::movePlayer()
 int Player::getPlayerDir()
 {
     return myDir;
+}
+
+bool Player::checkFoodConsumption()
+{
+
+}
+
+void Player::increasePlayerLength()
+{
+
 }

@@ -12,7 +12,7 @@ using namespace std;
 
 Player *myPlayer;
 GameMechs *myGM;
-Food *food1;
+Food *myF;
 
 void Initialize(void);
 void GetInput(void);
@@ -48,8 +48,9 @@ void Initialize(void)
    
     srand(time(NULL));
     myGM = new GameMechs();
-    myPlayer = new Player(myGM);
-    food1 = new Food(myGM);
+    myF = new Food(myGM);
+    myPlayer = new Player(myGM,myF);
+    
 
     // For debugging
     //food1->generateFood(myPlayer->getPlayerPos());

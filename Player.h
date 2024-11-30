@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "GameMechs.h"
+#include "Food.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
 
@@ -17,7 +18,7 @@ class Player
     public:
         enum Dir {UP, DOWN, LEFT, RIGHT, STOP};  // This is the direction state
 
-        Player(GameMechs* thisGMRef);
+        Player(GameMechs* thisGMRef, Food* thisFRef);
         ~Player();
 
         objPosArrayList* getPlayerPos() const; // Upgrade this in iteration 3.       
@@ -28,6 +29,8 @@ class Player
         Player(const Player &d);
         Player& operator=(const Player &d);
         int getPlayerDir();
+        bool checkFoodConsumption();
+        void increasePlayerLength();
 
     private:
         objPosArrayList* playerPosList; // Upgrade this in iteration 3.       
@@ -35,6 +38,7 @@ class Player
 
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
+        Food* mainFoodRef;
 };
 
 #endif
