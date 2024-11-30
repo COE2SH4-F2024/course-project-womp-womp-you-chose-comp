@@ -50,7 +50,8 @@ void Initialize(void)
     myGM = new GameMechs();
     myF = new Food(myGM);
     myPlayer = new Player(myGM,myF);
-
+    objPosArrayList* initialFood = myPlayer->getPlayerPos();
+    myF->generateFood(*initialFood);
 }
 
 void GetInput(void)
@@ -105,13 +106,18 @@ void DrawScreen(void)
                 {
                     MacUILib_printf("#");
                 }
-                else if(BoardObj.isPosEqual(&FoodLoc)){
+                // else if(BoardObj.isPosEqual(&FoodLoc)){
+                //     MacUILib_printf("%c", myF->getFoodSymbol());
+                // }
+                else if(i == myF->getFoodPosX() && j == myF->getFoodPosY()){
                     MacUILib_printf("%c", myF->getFoodSymbol());
                 }
+
                 else    // Print Empty Space
                 {
                     MacUILib_printf(" ");
                 }
+
             }
             snake = 0;
         }

@@ -135,13 +135,16 @@ void Player::movePlayer()
 
     //New Head position:
     
-
     nextPosition.setObjPos(headXPos,headYPos);
     playerPosList->insertHead(nextPosition);
     if(!FoodPos.isPosEqual(&nextPosition)){
-        playerPosList->removeTail();
-        mainFoodRef->generateFood(*playerPosList);   
+        playerPosList->removeTail();   
     }
+    else
+    {
+      mainFoodRef->generateFood(*playerPosList);   
+    }
+    
 
 }
 
