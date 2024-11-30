@@ -6,7 +6,7 @@ Player::Player(GameMechs* thisGMRef, Food* thisFRef)
     mainGameMechsRef = thisGMRef;
     mainFoodRef = thisFRef;
     myDir = STOP;
-
+    // hi
     // more actions to be included
     //New initialization of head position. 
     playerPosList = new objPosArrayList();
