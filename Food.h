@@ -22,7 +22,7 @@ class Food
         Food(GameMechs *thisGMref);
         ~Food();
 
-        void generateFood(const objPos& blockoff);
+        void generateFood(const objPosArrayList& blockoff);
         objPos getFoodPos() const;
         int getFoodPosX();
         int getFoodPosY();
