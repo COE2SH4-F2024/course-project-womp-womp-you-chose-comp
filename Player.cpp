@@ -89,7 +89,7 @@ void Player::movePlayer()
     int boardX = mainGameMechsRef->getBoardSizeX();
     int boardY = mainGameMechsRef->getBoardSizeY();
     
-
+    objPos FoodPos = mainFoodRef->getFoodPos();
     objPos nextPosition = objPos(playerPosList->getHeadElement());
     
     int headXPos = nextPosition.pos->x;
@@ -134,9 +134,15 @@ void Player::movePlayer()
     }
 
     //New Head position:
+    
+
     nextPosition.setObjPos(headXPos,headYPos);
     playerPosList->insertHead(nextPosition);
-    playerPosList->removeTail();
+    if(!FoodPos.isPosEqual(&nextPosition)){
+        playerPosList->removeTail();
+        mainFoodRef->generateFood(*playerPosList);   
+    }
+
 }
 
 // More methods to be added
