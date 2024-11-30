@@ -46,7 +46,7 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
    
-    srand(time(NULL));
+    //srand(time(NULL));
     myGM = new GameMechs();
     myF = new Food(myGM);
     myPlayer = new Player(myGM,myF);
@@ -73,7 +73,8 @@ void DrawScreen(void)
 {
     //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
     
-    int i, j, k, snake = 0;
+    int i, j, k;
+    bool snake = false;
     
     MacUILib_clearScreen();
     //MacUILib_printf("Key pressed: %c", myGM->getInput());
@@ -87,6 +88,7 @@ void DrawScreen(void)
         MacUILib_printf("\n");
         for (i = 0; i < myGM->getBoardSizeX(); i++)
         {
+            snake = 0;
             for(k = 0; k < playerPosList->getSize(); k++)
             {
                 tempObj.setObjPos(playerPosList->getElement(k));
@@ -95,13 +97,12 @@ void DrawScreen(void)
                 {
                     MacUILib_printf("%c", tempObj.symbol);
                     snake = 1;
-                    break;
                 }
             }
             if(!snake)
             {
-                BoardObj.setObjPos(i,j);
-                FoodLoc.getObjPos();
+                // BoardObj.setObjPos(i,j);
+                // FoodLoc.getObjPos();
                 if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1))) // Print game board
                 {
                     MacUILib_printf("#");
@@ -112,14 +113,12 @@ void DrawScreen(void)
                 else if(i == myF->getFoodPosX() && j == myF->getFoodPosY()){
                     MacUILib_printf("%c", myF->getFoodSymbol());
                 }
-
                 else    // Print Empty Space
                 {
                     MacUILib_printf(" ");
                 }
 
             }
-            snake = 0;
         }
     }
     MacUILib_printf("\n");  

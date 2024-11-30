@@ -77,7 +77,6 @@ void Player::updatePlayerDir()
             break;
             
         default:
-            myDir = STOP;
             break; 
     }
 }
@@ -136,7 +135,9 @@ void Player::movePlayer()
     //New Head position:
     
     nextPosition.setObjPos(headXPos,headYPos);
-    //playerPosList->insertHead(nextPosition);
+
+    playerPosList->insertHead(nextPosition);
+    
     if(!FoodPos.isPosEqual(&nextPosition)){
         playerPosList->removeTail();   
     }
@@ -154,16 +155,16 @@ int Player::getPlayerDir()
     return myDir;
 }
 
-bool Player::checkFoodConsumption()
-{
- //   if(mainFoodRef->getFoodPosX() ==)
-}
+// bool Player::checkFoodConsumption()
+// {
+//  //   if(mainFoodRef->getFoodPosX() ==)
+// }
 
-void Player::increasePlayerLength()
-{
+// void Player::increasePlayerLength()
+// {
     
-//     objPos nextPosition = objPos(playerPosList->getHeadElement());
+// //     objPos nextPosition = objPos(playerPosList->getHeadElement());
     
-//     playerPosList->insertHead(nextPosition);//Insert Head
+// //     playerPosList->insertHead(nextPosition);//Insert Head
 
-}
+// }

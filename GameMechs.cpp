@@ -46,7 +46,7 @@ void GameMechs::collectAsyncInput()
         input = MacUILib_getChar();
     }
 
-    if(input == ' ') exitFlag = true;
+    if(input == 27) exitFlag = true;
 }
 
 char GameMechs::getInput() const

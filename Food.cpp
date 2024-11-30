@@ -14,6 +14,7 @@ Food::~Food()
 
 void Food::generateFood(const objPosArrayList& blockoff)
 {
+    srand(time(NULL));
     int valid = 0;
     int size = blockoff.getSize();
     while(!valid)

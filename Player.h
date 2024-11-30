@@ -29,8 +29,8 @@ class Player
         Player(const Player &d);
         Player& operator=(const Player &d);
         int getPlayerDir();
-        bool checkFoodConsumption();
-        void increasePlayerLength();
+        // bool checkFoodConsumption();
+        // void increasePlayerLength();
 
     private:
         objPosArrayList* playerPosList; // Upgrade this in iteration 3.       

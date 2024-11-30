@@ -65,6 +65,7 @@ void objPosArrayList::insertHead(objPos thisPos)
     {
         // cout << "Element to shuffle: " << aList[i-1] << endl;
         aList[i+1] = aList[i - 1];
+        // cout<<"Length of list"<< listSize<<endl; 
     }
     //First element
     aList[0] = thisPos;
