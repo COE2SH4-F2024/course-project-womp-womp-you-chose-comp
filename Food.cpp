@@ -12,9 +12,10 @@ Food::~Food()
     delete[] foodPos;
 }
 
-void Food::generateFood(const objPos& blockoff)
+void Food::generateFood(const objPosArrayList& blockoff)
 {
     int valid = 0;
+    int size = blockoff.getSize();
     while(!valid)
     {
         valid = 1; 
@@ -22,9 +23,13 @@ void Food::generateFood(const objPos& blockoff)
         rand_y = rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1;
         foodPos->setObjPos(rand_x, rand_y, '@');
 
-        if(foodPos->isPosEqual(&blockoff)){
-            valid = 0; 
+        for(int i = 0; i < size; i++ ){
+            objPos bodElement = blockoff.getElement(i);
+            if(foodPos->isPosEqual(&bodElement)){
+                valid = 0; 
+            }
         }
+
     }
 }
 
