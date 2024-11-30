@@ -136,7 +136,7 @@ void Player::movePlayer()
     //New Head position:
     
     nextPosition.setObjPos(headXPos,headYPos);
-    playerPosList->insertHead(nextPosition);
+    //playerPosList->insertHead(nextPosition);
     if(!FoodPos.isPosEqual(&nextPosition)){
         playerPosList->removeTail();   
     }
@@ -156,10 +156,14 @@ int Player::getPlayerDir()
 
 bool Player::checkFoodConsumption()
 {
-
+ //   if(mainFoodRef->getFoodPosX() ==)
 }
 
 void Player::increasePlayerLength()
 {
+    
+//     objPos nextPosition = objPos(playerPosList->getHeadElement());
+    
+//     playerPosList->insertHead(nextPosition);//Insert Head
 
 }
