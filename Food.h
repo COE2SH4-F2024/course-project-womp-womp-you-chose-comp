@@ -19,14 +19,14 @@ class Food
         int rand_y;
 
     public:
-        Food(GameMechs *thisGMref);
-        ~Food();
+        Food(GameMechs *thisGMref);                         // specific constructor
+        ~Food();                                            // destructor
 
-        void generateFood(const objPosArrayList& blockoff);
-        objPos getFoodPos() const;
-        int getFoodPosX();
-        int getFoodPosY();
-        char getFoodSymbol();
+        void generateFood(const objPosArrayList& blockoff); // generates food with positions of all snake elements
+        objPos getFoodPos() const;                          // returns objPos object of Food position
+        int getFoodPosX();                                  // returns int of food x position
+        int getFoodPosY();                                  // returns int of food y position
+        char getFoodSymbol();                               // returns char of food symbol
 
 };
 #endif

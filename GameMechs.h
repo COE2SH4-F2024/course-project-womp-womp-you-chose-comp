@@ -23,27 +23,27 @@ class GameMechs
         objPos food;
 
     public:
-        GameMechs();
-        GameMechs(int boardX, int boardY);
-        ~GameMechs(); // is this one needed at all? Why or why not?
+        GameMechs();                        // Default constructor
+        GameMechs(int boardX, int boardY);  // Special Constructor
+        ~GameMechs();                       // destructor not needed, no new objects initialized on the heap
         
-        bool getExitFlagStatus() const; 
-        void setExitTrue();
-        bool getLoseFlagStatus() const;
-        void setLoseFlag();
+        bool getExitFlagStatus() const;     // getter: gets exit flag status
+        void setExitTrue();                 // setter: sets exit flag status to true
+        bool getLoseFlagStatus() const;     // getter: gets lose flag status
+        void setLoseFlag();                 // setter: sets lost and exit flag status to true
 
-        char getInput() const;
-        void setInput(char this_input);
-        void clearInput();
+        char getInput() const;              // getter: gets input
+        void setInput(char this_input);     // setter: sets input with input parameter
+        void clearInput();                  // setter: clears input
 
-        int getBoardSizeX() const;
-        int getBoardSizeY() const;
+        int getBoardSizeX() const;          // getter: gets int of board x size
+        int getBoardSizeY() const;          // getter: gets int of board y size
         
-        int getScore() const;
-        void incrementScore();
+        int getScore() const;               // getter: gets score
+        void incrementScore();              // setter: increments score by one
         
         // More methods should be added here
-        void collectAsyncInput();
+        void collectAsyncInput();           // collects input using MacUILib
 };
 
 #endif
