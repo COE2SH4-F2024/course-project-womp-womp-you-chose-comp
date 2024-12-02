@@ -31,7 +31,7 @@ objPos::objPos(const objPos &d) // Copy constructor
     symbol = d.symbol;
 }
 
-objPos& objPos::operator=(const objPos &d) // copy assignment operator
+objPos& objPos::operator=(const objPos &d) // Copy assignment operator
 {
     if(this != &d)
     {
@@ -44,10 +44,7 @@ objPos& objPos::operator=(const objPos &d) // copy assignment operator
     }
 
     return *this;
-    
 }
-
-
 
 void objPos::setObjPos(objPos o)
 {

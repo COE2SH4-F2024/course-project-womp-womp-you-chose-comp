@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(GameMechs* thisGMRef, Food* thisFRef)
+Player::Player(GameMechs* thisGMRef, Food* thisFRef)    
 {
     mainGameMechsRef = thisGMRef;
     mainFoodRef = thisFRef;
@@ -9,63 +9,57 @@ Player::Player(GameMechs* thisGMRef, Food* thisFRef)
     // more actions to be included
     //New initialization of head position. 
     playerPosList = new objPosArrayList();
-    playerPosList->insertHead(objPos(5,5,'*'));
+    playerPosList->insertHead(objPos(10,5,'o'));
 }
 
 
-Player::~Player()
+Player::~Player()           // Destructor
 {
-    // delete any heap members here
-    // no keyword "new" in the constructotr, hence no heap member.
-    delete playerPosList;
-    // we can leave the destructor empty for now...
-    // Iteration 3 update: NOT ANYMORE??
-
+    delete playerPosList;   // Deleting PlayerPosList from the heap
 }
 
-objPosArrayList* Player::getPlayerPos() const
+objPosArrayList* Player::getPlayerPos() const   // Getter
 {
-    // return the reference to the playerPos arrray list
-    return playerPosList;
+    
+    return playerPosList;           // Return the reference to the playerPos arrray list
 }
 
-void Player::updatePlayerDir()
+void Player::updatePlayerDir()  
 {
-    // PPA3 input processing logic
+    // PPA3 input processing logic:
     char input = mainGameMechsRef->getInput();
-    //Where do i get the input
 
-    switch(input)
+    switch(input) // Switch Case to determine input
     {
-        case 27:  // exit
-            mainGameMechsRef->setExitTrue();
+        case 27:  // Case if "esc" key
+            mainGameMechsRef->setExitTrue();    // Ends Game
             break;
 
-        case 'w': //w key
+        case 'w': //Case if w key
             if (myDir != DOWN){
                 myDir = UP;
             }
             break;
 
-        case 'a': // a key
+        case 'a': // Case if a key
             if (myDir != RIGHT){ 
             myDir = LEFT;
             }
             break;
         
-        case 's': // s key
+        case 's': // Case if s key
             if (myDir != UP){ 
             myDir = DOWN;
             }
             break;
         
-        case 'd': // d key
+        case 'd': // Case if d key
             if (myDir != LEFT){ 
             myDir = RIGHT;
             }
             break;
         
-        //debugging cases
+                //Debugging cases/cheat code ;)
         case 'p':
             mainGameMechsRef->incrementScore();
             break;
@@ -73,7 +67,7 @@ void Player::updatePlayerDir()
             mainGameMechsRef->setLoseFlag();
             break;
             
-        default:
+        default:    // Default case, no key pressed
             break; 
     }
 }
@@ -82,14 +76,14 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
     
-    int boardX = mainGameMechsRef->getBoardSizeX();
-    int boardY = mainGameMechsRef->getBoardSizeY();
+    int boardX = mainGameMechsRef->getBoardSizeX();     // X board coordinate
+    int boardY = mainGameMechsRef->getBoardSizeY();     // Y board coordinate
     
-    objPos FoodPos = mainFoodRef->getFoodPos();
+    objPos FoodPos = mainFoodRef->getFoodPos();         // Getting Food element x-y coordinates
     objPos nextPosition = objPos(playerPosList->getHeadElement());
     
-    int headXPos = nextPosition.pos->x;
-    int headYPos = nextPosition.pos->y;
+    int headXPos = nextPosition.pos->x;     // Setting next head position (x)
+    int headYPos = nextPosition.pos->y;     // Setting next head position (y) 
 
     switch(myDir) // Updating Position Based on Direction
     {
@@ -130,27 +124,21 @@ void Player::movePlayer()
     }
 
     //New Head position:
-    
-    nextPosition.setObjPos(headXPos,headYPos);
-
-    playerPosList->insertHead(nextPosition);
-    
-    if(!FoodPos.isPosEqual(&nextPosition)){
-        playerPosList->removeTail();   
+    nextPosition.setObjPos(headXPos,headYPos);      // Setting next Head x/y position
+    playerPosList->insertHead(nextPosition);        // Placing Head of snake at next position
+    if(!FoodPos.isPosEqual(&nextPosition)){         // Checking if head is eating food
+        playerPosList->removeTail();                // Removes snake tail
     }
-    // else if(checkSelfCollision()){
-    //     mainGameMechsRef->setLoseFlag();
-    // }
     else
     {
-      mainFoodRef->generateFood(*playerPosList);   
-      mainGameMechsRef->incrementScore();
-    }
-    
-    if(checkSelfCollision()){
-        mainGameMechsRef->setLoseFlag();
+      mainFoodRef->generateFood(*playerPosList);    // Generates a new food
+      mainGameMechsRef->incrementScore();           // INcrements score
     }
 
+    if(checkSelfCollision()){                       // Checks self conflict flag
+        mainGameMechsRef->setLoseFlag();            // Ends Game
+    }
+    
 }
 
 // More methods to be added
@@ -161,33 +149,14 @@ int Player::getPlayerDir()
 
 bool Player::checkSelfCollision()
 {
-    //ObjPos nextPosition = objPos(playerPosList->getHeadElement());
     objPos headObjPos = playerPosList->getHeadElement(); 
     objPos bodyElement;
 
-    for(int k = 1; k < playerPosList->getSize(); k++){
-        //bodyElement.setObjPos(playerPosList->getElement(k));
-        bodyElement = playerPosList->getElement(k);
-        //mainGameMechsRef->setLoseFlag();
-        //Here Problem
-        if(headObjPos.isPosEqual(&bodyElement)){
-            mainGameMechsRef->setLoseFlag();
+    for(int k = 1; k < playerPosList->getSize(); k++){      // Iterates through snake body
+        bodyElement = playerPosList->getElement(k);         // Sets objPos bodyElement
+        if(headObjPos.isPosEqual(&bodyElement)){            // Checks if head is ever hitting body element
             return true;
         }
-            
     }
     return false;
 }
-// bool Player::checkFoodConsumption()
-// {
-//     mainGa
-// }
-
-// void Player::increasePlayerLength()
-// {
-    
-// //     objPos nextPosition = objPos(playerPosList->getHeadElement());
-    
-// //     playerPosList->insertHead(nextPosition);//Insert Head
-
-// }

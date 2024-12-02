@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define DELAY_CONST 100000
+#define DELAY_CONST 70000     // Delay constant Aka game speed
 
 Player *myPlayer;
 GameMechs *myGM;
@@ -45,19 +45,16 @@ void Initialize(void)
 {
     MacUILib_init();
     MacUILib_clearScreen();
-   
-    //srand(time(NULL));
     myGM = new GameMechs();
     myF = new Food(myGM);
-    myPlayer = new Player(myGM,myF);
-    objPosArrayList* initialFood = myPlayer->getPlayerPos();
-    //myF->generateFood(*initialFood);
+    myPlayer = new Player(myGM,myF);                            // Spawning First Snake head
+    objPosArrayList* initialFood = myPlayer->getPlayerPos();    // Creating the Initial Food
 }
 
 void GetInput(void)
 {
     myGM->clearInput();
-    myGM->collectAsyncInput();
+    myGM->collectAsyncInput();      // Collecting User Input
 }
 
 void RunLogic(void)
@@ -70,55 +67,41 @@ void RunLogic(void)
 }
 
 void DrawScreen(void)
-{
-    //IMPLEMENT COPY ASSINGMENT OPERATOR TO MAKE THIS LINE WORK
-    
+{   
     int i, j, k;
     bool snake = false;
     
     MacUILib_clearScreen();
-    //MacUILib_printf("Key pressed: %c", myGM->getInput());
-    objPosArrayList* playerPosList = myPlayer->getPlayerPos(); // getting player location
+    objPosArrayList* playerPosList = myPlayer->getPlayerPos(); // Getting player location
     objPos tempObj;
-    objPos BoardObj;
-    objPos FoodLoc;
 
-    for (j = 0; j < myGM->getBoardSizeY(); j++)
+    for (j = 0; j < myGM->getBoardSizeY(); j++)                 // Iterate through X
     {
         MacUILib_printf("\n");
-        for (i = 0; i < myGM->getBoardSizeX(); i++)
+        for (i = 0; i < myGM->getBoardSizeX(); i++)             // Iterate through Y
         {
             snake = 0;
-            for(k = 0; k < playerPosList->getSize(); k++)
+            for(k = 0; k < playerPosList->getSize(); k++)       // Iterate through Snake
             {
-                //cout<<playerPosList->getSize()<<endl;
                 tempObj.setObjPos(playerPosList->getElement(k));
-
-                //cout<<tempObj.pos->x<<endl;
-
-                if(i == tempObj.pos->x && j == tempObj.pos->y)
+                if(i == tempObj.pos->x && j == tempObj.pos->y)  // Checking if the Snake exists in each x-y coordinate
                 {
-                    MacUILib_printf("%c", tempObj.symbol);
+                    MacUILib_printf("%c", tempObj.symbol);      // Printing the snake
                     snake = 1;
                     break; 
                 }
             
             }
-            if(!snake)
+            if(!snake)  // Checking if snake was printed, if yes, skip
             {
-                // BoardObj.setObjPos(i,j);
-                // FoodLoc.getObjPos();
                 if ( (j==0) || (j==(myGM->getBoardSizeY()-1)) || (i==0) || (i==(myGM->getBoardSizeX()-1))) // Print game board
                 {
                     MacUILib_printf("#");
                 }
-                // else if(BoardObj.isPosEqual(&FoodLoc)){
-                //     MacUILib_printf("%c", myF->getFoodSymbol());
-                // }
-                else if(i == myF->getFoodPosX() && j == myF->getFoodPosY()){
+                else if(i == myF->getFoodPosX() && j == myF->getFoodPosY()){    // Print food
                     MacUILib_printf("%c", myF->getFoodSymbol());
                 }
-                else    // Print Empty Space
+                else        // Print Empty Space
                 {
                     MacUILib_printf(" ");
                 }
@@ -126,28 +109,27 @@ void DrawScreen(void)
         }
     }
     MacUILib_printf("\n");  
-    MacUILib_printf("Your score is: %d\n", myGM->getScore());
+    MacUILib_printf("Your score is: %d\n", myGM->getScore());   // Printing player score
+    MacUILib_printf("Instructions: Use WASD to control the snake. You can use the escape key to exit the game.\nIf you can find it, there is also a secret button to increase your points!\n");
     if(myGM->getLoseFlagStatus()){
-        MacUILib_printf("Hi Scott!! You lost! Sorry!\n");
+        MacUILib_printf("\nUnfortunately you hit yourself! You lost!\n");       // Printing Losing message
     }
     else if(myGM->getExitFlagStatus()){
-        MacUILib_printf("You exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");
+        MacUILib_printf("\nYou exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");     // Printing Exit message
     }
 
 }
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST); // 0.1s delay
+    MacUILib_Delay(DELAY_CONST); // Calling Delay Constant
 }
 
 
-void CleanUp(void)
+void CleanUp(void)  // Deleting instances from the Heap
 {   
-    
     delete myPlayer;
     delete myGM;
     delete myF;
-
     MacUILib_uninit();
 }

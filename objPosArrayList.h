@@ -9,8 +9,8 @@ class objPosArrayList
 {
     private:
         objPos* aList;
-        int listSize;
-        int arrayCapacity;
+        int listSize;       // Snake
+        int arrayCapacity;  // Max Snake Size
 
     public:
         objPosArrayList(); //Default constructor
@@ -19,14 +19,14 @@ class objPosArrayList
         ~objPosArrayList(); //Destructor
 
         int getSize() const;
-        void insertHead(objPos thisPos);
-        void insertTail(objPos thisPos);
-        void removeHead();
-        void removeTail();
+        void insertHead(objPos thisPos);    // Inserts New Head to snake
+        void insertTail(objPos thisPos);    // Inserts New Tail to snake
+        void removeHead();                  // Removes Snake Head
+        void removeTail();                  // Removes Snake Tail
         
-        objPos getHeadElement() const;
-        objPos getTailElement() const;
-        objPos getElement(int index) const;
+        objPos getHeadElement() const;      // Returns Head x-y coordinates
+        objPos getTailElement() const;      // Return Tail x-Y Coordinates
+        objPos getElement(int index) const; // Returns 1 element of the snake
 };
 
 #endif
