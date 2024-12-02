@@ -161,9 +161,14 @@ bool Player::checkSelfCollision()
     //ObjPos nextPosition = objPos(playerPosList->getHeadElement());
     objPos headObjPos = playerPosList->getHeadElement(); 
     objPos bodyElement;
+
     for(int k = 3; k < playerPosList->getSize(); k++){
-        bodyElement.setObjPos(playerPosList->getElement(k));
+        //bodyElement.setObjPos(playerPosList->getElement(k));
+        bodyElement = playerPosList->getElement(k);
+        //mainGameMechsRef->setLoseFlag();
+        //Here Problem
         if(headObjPos.isPosEqual(&bodyElement)){
+            mainGameMechsRef->setLoseFlag();
             return true;
         }
             
