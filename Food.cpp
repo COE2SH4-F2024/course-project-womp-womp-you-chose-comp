@@ -9,7 +9,7 @@ Food::Food(GameMechs *thisGMref)
 
 Food::~Food()
 {
-    delete[] foodPos;
+    delete foodPos;
 }
 
 void Food::generateFood(const objPosArrayList& blockoff)
