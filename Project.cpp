@@ -92,7 +92,6 @@ void DrawScreen(void)
             for(k = 0; k < playerPosList->getSize(); k++)
             {
                 //cout<<playerPosList->getSize()<<endl;
-
                 tempObj.setObjPos(playerPosList->getElement(k));
 
                 //cout<<tempObj.pos->x<<endl;
@@ -122,20 +121,19 @@ void DrawScreen(void)
                 {
                     MacUILib_printf(" ");
                 }
-
             }
         }
     }
     MacUILib_printf("\n");  
-
+    MacUILib_printf("Your score is: %d\n", myGM->getScore());
     if(myGM->getLoseFlagStatus()){
-        MacUILib_printf("You suck Biatch!\n");
-        MacUILib_printf("Your score is: %d", myGM->getScore());
+        MacUILib_printf("Hi Scott!! You lost! Sorry!\n");
     }
     else if(myGM->getExitFlagStatus()){
         MacUILib_printf("You exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");
-        MacUILib_printf("Your score is: %d", myGM->getScore());
     }
+
+    //MacUILib_printf("Here!\n");
 }
 
 void LoopDelay(void)
@@ -146,7 +144,11 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {   
+    
     delete myPlayer;
+        MacUILib_printf("Here!\n");
+
+
     delete myGM;
 
     MacUILib_uninit();

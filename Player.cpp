@@ -17,7 +17,7 @@ Player::~Player()
 {
     // delete any heap members here
     // no keyword "new" in the constructotr, hence no heap member.
-    delete[] playerPosList;
+    delete playerPosList;
     // we can leave the destructor empty for now...
     // Iteration 3 update: NOT ANYMORE??
 
@@ -138,9 +138,13 @@ void Player::movePlayer()
     if(!FoodPos.isPosEqual(&nextPosition)){
         playerPosList->removeTail();   
     }
+    else if(checkSelfCollision()){
+        mainGameMechsRef->setLoseFlag();
+    }
     else
     {
       mainFoodRef->generateFood(*playerPosList);   
+      mainGameMechsRef->incrementScore();
     }
     
 
@@ -152,9 +156,23 @@ int Player::getPlayerDir()
     return myDir;
 }
 
+bool Player::checkSelfCollision()
+{
+    //ObjPos nextPosition = objPos(playerPosList->getHeadElement());
+    objPos headObjPos = playerPosList->getHeadElement(); 
+    objPos bodyElement;
+    for(int k = 3; k < playerPosList->getSize(); k++){
+        bodyElement.setObjPos(playerPosList->getElement(k));
+        if(headObjPos.isPosEqual(&bodyElement)){
+            return true;
+        }
+            
+    }
+    return false;
+}
 // bool Player::checkFoodConsumption()
 // {
-//  //   if(mainFoodRef->getFoodPosX() ==)
+//     mainGa
 // }
 
 // void Player::increasePlayerLength()

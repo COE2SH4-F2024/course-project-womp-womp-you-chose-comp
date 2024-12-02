@@ -31,6 +31,7 @@ class Player
         int getPlayerDir();
         // bool checkFoodConsumption();
         // void increasePlayerLength();
+        bool checkSelfCollision();
 
     private:
         objPosArrayList* playerPosList; // Upgrade this in iteration 3.       
