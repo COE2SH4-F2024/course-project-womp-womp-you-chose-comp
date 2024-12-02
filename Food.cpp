@@ -19,11 +19,11 @@ void Food::generateFood(const objPosArrayList& blockoff)
     int size = blockoff.getSize();
     while(!valid)
     {
-        valid = 1; 
         rand_x = rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1;
         rand_y = rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1;
         foodPos->setObjPos(rand_x, rand_y, '@');
 
+        valid = 1; 
         for(int i = 0; i < size; i++ ){
             objPos bodElement = blockoff.getElement(i);
             if(foodPos->isPosEqual(&bodElement)){

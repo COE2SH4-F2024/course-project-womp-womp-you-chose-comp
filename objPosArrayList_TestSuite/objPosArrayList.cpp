@@ -8,7 +8,7 @@ objPosArrayList::objPosArrayList()
 {
     aList = new objPos[ARRAY_MAX_CAP];
     arrayCapacity = ARRAY_MAX_CAP;
-    listSize = 0;
+    listSize = 1;
 }
 
 objPosArrayList::objPosArrayList(const objPosArrayList &d) // Copy Constructor
@@ -54,7 +54,7 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if(listSize >= arrayCapacity){ // IF SOMETHING IS BROKERN MAKE THIS ARRAY_MAX_CAP
+    if(listSize >= ARRAY_MAX_CAP){ // IF SOMETHING IS BROKERN MAKE THIS ARRAY_MAX_CAP
         throw overflow_error("insertHead Error: List is already full");
     }
     for(int i = listSize; i > 0; i--)

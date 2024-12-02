@@ -91,13 +91,18 @@ void DrawScreen(void)
             snake = 0;
             for(k = 0; k < playerPosList->getSize(); k++)
             {
+                //cout<<playerPosList->getSize()<<endl;
+
                 tempObj.setObjPos(playerPosList->getElement(k));
+
+                //cout<<tempObj.pos->x<<endl;
 
                 if(i == tempObj.pos->x && j == tempObj.pos->y)
                 {
                     MacUILib_printf("%c", tempObj.symbol);
                     snake = 1;
                 }
+            
             }
             if(!snake)
             {

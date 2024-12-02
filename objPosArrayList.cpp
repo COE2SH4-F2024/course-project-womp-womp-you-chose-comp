@@ -57,14 +57,14 @@ int objPosArrayList::getSize() const // Getter
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    if(listSize >= arrayCapacity){ // IF SOMETHING IS BROKEN MAKE THIS ARRAY_MAX_CAP
+    if(listSize >= ARRAY_MAX_CAP){ // IF SOMETHING IS BROKEN MAKE THIS ARRAY_MAX_CAP
         throw overflow_error("insertHead Error: List is already full");
     }
     
-    for(int i = listSize; i > 0; i--)
+    for(int i = listSize-1; i >= 0; i--)
     {
         // cout << "Element to shuffle: " << aList[i-1] << endl;
-        aList[i+1] = aList[i - 1];
+        aList[i+1] = aList[i];
         // cout<<"Length of list"<< listSize<<endl; 
     }
     //First element
@@ -120,6 +120,7 @@ objPos objPosArrayList::getTailElement() const
     if(listSize == 0){
         throw underflow_error("getTailElement Error: List is empty");
     }
+
     //returning last item in list
     return aList[listSize - 1];
 }
