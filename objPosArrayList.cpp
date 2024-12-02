@@ -27,7 +27,7 @@ objPosArrayList::objPosArrayList(const objPosArrayList &d) // Copy Constructor
     }
 }
 
-objPosArrayList &objPosArrayList::operator=(const objPosArrayList &d) // Copy assignment operator 
+objPosArrayList &objPosArrayList::operator=(const objPosArrayList &d) // Copy Assignment operator 
 {
     if(this != &d)
     {
@@ -55,17 +55,15 @@ int objPosArrayList::getSize() const // Getter
     return listSize;
 }
 
-void objPosArrayList::insertHead(objPos thisPos)
+void objPosArrayList::insertHead(objPos thisPos)    // Inserts New Head
 {
-    if(listSize >= ARRAY_MAX_CAP){ // IF SOMETHING IS BROKEN MAKE THIS ARRAY_MAX_CAP
+    if(listSize >= ARRAY_MAX_CAP){
         throw overflow_error("insertHead Error: List is already full");
     }
     
-    for(int i = listSize-1; i >= 0; i--)
+    for(int i = listSize-1; i >= 0; i--)            // Shuffeling elements of the snake
     {
-        // cout << "Element to shuffle: " << aList[i-1] << endl;
         aList[i+1] = aList[i];
-        // cout<<"Length of list"<< listSize<<endl; 
     }
     //First element
     aList[0] = thisPos;
@@ -74,7 +72,7 @@ void objPosArrayList::insertHead(objPos thisPos)
     listSize++;
 }
 
-void objPosArrayList::insertTail(objPos thisPos)
+void objPosArrayList::insertTail(objPos thisPos)    // Inserts Tail
 {
     if(listSize >= arrayCapacity)
     {
@@ -84,7 +82,7 @@ void objPosArrayList::insertTail(objPos thisPos)
     listSize++;
 }
 
-void objPosArrayList::removeHead()
+void objPosArrayList::removeHead()                  // Removes Head of Snake
 {
     if(listSize == 0){
         throw underflow_error("removeHead Error: List is empty");
@@ -97,7 +95,7 @@ void objPosArrayList::removeHead()
     listSize--;
 }
 
-void objPosArrayList::removeTail()
+void objPosArrayList::removeTail()                  // Removes tail of Snake
 {
     if(listSize == 0){
         throw underflow_error("removeTail Error: List is empty");
@@ -107,7 +105,7 @@ void objPosArrayList::removeTail()
 
 }
 
-objPos objPosArrayList::getHeadElement() const
+objPos objPosArrayList::getHeadElement() const      // Returns Head Element
 {
     if(listSize == 0){
         throw underflow_error("getHeadElement Error: List is empty");
@@ -115,7 +113,7 @@ objPos objPosArrayList::getHeadElement() const
     return aList[0]; // return first element in list
 }
 
-objPos objPosArrayList::getTailElement() const
+objPos objPosArrayList::getTailElement() const      // Returns Tail Element
 {
     if(listSize == 0){
         throw underflow_error("getTailElement Error: List is empty");
@@ -125,7 +123,7 @@ objPos objPosArrayList::getTailElement() const
     return aList[listSize - 1];
 }
 
-objPos objPosArrayList::getElement(int index) const
+objPos objPosArrayList::getElement(int index) const // Returns Element of Snake
 {
     if(index < 0 || index >= arrayCapacity){
         throw out_of_range("getElement Error: Index is out of range");

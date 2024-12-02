@@ -44,7 +44,6 @@ objPos& objPos::operator=(const objPos &d)  // Copy Assignment Operator
     }
 
     return *this;
-    
 }
 
 
