@@ -138,15 +138,18 @@ void Player::movePlayer()
     if(!FoodPos.isPosEqual(&nextPosition)){
         playerPosList->removeTail();   
     }
-    else if(checkSelfCollision()){
-        mainGameMechsRef->setLoseFlag();
-    }
+    // else if(checkSelfCollision()){
+    //     mainGameMechsRef->setLoseFlag();
+    // }
     else
     {
       mainFoodRef->generateFood(*playerPosList);   
       mainGameMechsRef->incrementScore();
     }
     
+    if(checkSelfCollision()){
+        mainGameMechsRef->setLoseFlag();
+    }
 
 }
 
@@ -162,7 +165,7 @@ bool Player::checkSelfCollision()
     objPos headObjPos = playerPosList->getHeadElement(); 
     objPos bodyElement;
 
-    for(int k = 3; k < playerPosList->getSize(); k++){
+    for(int k = 1; k < playerPosList->getSize(); k++){
         //bodyElement.setObjPos(playerPosList->getElement(k));
         bodyElement = playerPosList->getElement(k);
         //mainGameMechsRef->setLoseFlag();

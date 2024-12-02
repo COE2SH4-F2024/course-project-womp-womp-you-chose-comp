@@ -100,6 +100,7 @@ void DrawScreen(void)
                 {
                     MacUILib_printf("%c", tempObj.symbol);
                     snake = 1;
+                    break; 
                 }
             
             }
@@ -133,7 +134,6 @@ void DrawScreen(void)
         MacUILib_printf("You exited the Game!?!?! Why!?!?! Come back! Please! PLEEEEAAAASEEEE!\n");
     }
 
-    //MacUILib_printf("Here!\n");
 }
 
 void LoopDelay(void)
@@ -146,10 +146,8 @@ void CleanUp(void)
 {   
     
     delete myPlayer;
-        MacUILib_printf("Here!\n");
-
-
     delete myGM;
+    delete myF;
 
     MacUILib_uninit();
 }
