@@ -63,9 +63,10 @@ void Player::updatePlayerDir()
         case 'p':
             mainGameMechsRef->incrementScore();
             break;
-        case 'l':
-            mainGameMechsRef->setLoseFlag();
-            break;
+        // Commented out test for lose game
+        // case 'l':
+        //     mainGameMechsRef->setLoseFlag();
+        //     break;
             
         default:    // Default case, no key pressed
             break; 
